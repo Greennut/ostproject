@@ -1,5 +1,7 @@
 {% extends "admin_base.html" %}
         {% block content %}
+        <a href="/admin/add_blog">add Blog</a>
+        <br>
         {% for blog in blogs %}
         {{ blog.name }}
 {{ blog.owner }}

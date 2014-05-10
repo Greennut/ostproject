@@ -12,6 +12,7 @@ class Post(ndb.Model):
     owner = ndb.StringProperty()
     body = ndb.StringProperty()
     blog = ndb.KeyProperty(kind=Blog)
+    tag = ndb.StringProperty()
     create_time = ndb.DateTimeProperty(default=datetime.datetime.now())
     update_time = ndb.DateTimeProperty(auto_now=True, default=datetime.datetime.now())
 

@@ -27,7 +27,7 @@ def add_blog(request):
         blog.owner = user_email()
         blog.name = request.POST['name']
         blog.put()
-        return render(request, "admin/add_blog.html")
+        return HttpResponseRedirect("/admin/list_blog")
 
 
 def edit_blog(request, blog_id):
@@ -38,7 +38,6 @@ def edit_blog(request, blog_id):
         blog = ndb.Key("Blog", int(blog_id)).get()
         blog.name = request.POST['name']
         blog.put()
-
         return HttpResponseRedirect("/admin/list_blog")
 
 
@@ -51,10 +50,11 @@ def add_post(request):
         post.owner = user_email()
         post.title = request.POST['title']
         post.body = request.POST['body']
+        post.tag = request.POST['tag']
         key = ndb.Key("Blog", int(request.POST['blog_id']))
         post.blog = key.get().key
         post.put()
-        return HttpResponseRedirect("/admin/post_list")
+        return HttpResponseRedirect("/admin/list_post")
 
 
 def list_post(request):
@@ -68,9 +68,10 @@ def edit_post(request, post_id):
         blogs = Blog.query(Blog.owner == user_email()).fetch()
         return render(request, "admin/add_post.html", {"post": key.get(), "blogs": blogs})
     elif request.method == "POST":
-        post = ndb.Key("Post", int(request.POST['id'])).get()
+        post = ndb.Key("Post", int(post_id)).get()
         post.title = request.POST['title']
         post.body = request.POST['body']
+        post.tag = request.POST['tag']
         post.blog = ndb.Key("Blog", int(request.POST['blog_id'])).get().key
         post.put()
-        return HttpResponseRedirect("/admin/post_list")
+        return HttpResponseRedirect("/admin/list_post")

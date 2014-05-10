@@ -14,6 +14,7 @@ dbindexer.autodiscover()
 urlpatterns = patterns('',
     # ('^_ah/warmup$', 'djangoappengine.views.warmup'),
     ('^$', "blog.views.index"),
+    ('^admin$', "blog.admin.index"),
     ('^admin/index', "blog.admin.index"),
     ('^admin/list_blog', "blog.admin.list_blog"),
     ('^admin/add_blog', "blog.admin.add_blog"),
@@ -23,5 +24,5 @@ urlpatterns = patterns('',
     (r'^admin/edit_post/(?P<post_id>\d+)/$', "blog.admin.edit_post"),
 )
 
-import os
-urlpatterns += static("/static/", document_root=os.path.join(os.path.dirname(__file__), 'static'));
+# import os
+# urlpatterns += static("/static/", document_root=os.path.join(os.path.dirname(__file__), 'static'));
