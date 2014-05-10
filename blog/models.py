@@ -7,14 +7,22 @@ class Blog(ndb.Model):
     owner = ndb.StringProperty()
 
 
+class Tag(ndb.Model):
+    tag = ndb.StringProperty()
+
+
 class Post(ndb.Model):
     title = ndb.StringProperty()
     owner = ndb.StringProperty()
     body = ndb.StringProperty()
     blog = ndb.KeyProperty(kind=Blog)
-    tag = ndb.StringProperty()
+    tags = ndb.StringProperty(repeated=True)
     create_time = ndb.DateTimeProperty(default=datetime.datetime.now())
     update_time = ndb.DateTimeProperty(auto_now=True, default=datetime.datetime.now())
+
+    def _pre_put_hook(self):
+        for tag in self.tags:
+            Tag.get_or_insert(tag)
 
     def get_blog_name(self):
         blog = self.blog.get()

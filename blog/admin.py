@@ -50,7 +50,7 @@ def add_post(request):
         post.owner = user_email()
         post.title = request.POST['title']
         post.body = request.POST['body']
-        post.tag = request.POST['tag']
+        post.tags = request.POST['tag'].split(",")
         key = ndb.Key("Blog", int(request.POST['blog_id']))
         post.blog = key.get().key
         post.put()
@@ -66,12 +66,15 @@ def edit_post(request, post_id):
     if request.method == "GET":
         key = ndb.Key("Post", int(post_id))
         blogs = Blog.query(Blog.owner == user_email()).fetch()
-        return render(request, "admin/add_post.html", {"post": key.get(), "blogs": blogs})
+        post = key.get()
+        post.tags_string = ",".join(post.tags)
+        return render(request, "admin/add_post.html", {"post": post, "blogs": blogs})
     elif request.method == "POST":
         post = ndb.Key("Post", int(post_id)).get()
         post.title = request.POST['title']
         post.body = request.POST['body']
-        post.tag = request.POST['tag']
+        post.tags = request.POST['tag'].split(",")
         post.blog = ndb.Key("Blog", int(request.POST['blog_id'])).get().key
         post.put()
         return HttpResponseRedirect("/admin/list_post")
+

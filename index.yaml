@@ -27,6 +27,18 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Post
+  properties:
+  - name: tag
+  - name: create_time
+    direction: desc
+
+- kind: Post
+  properties:
+  - name: tags
+  - name: create_time
+    direction: desc
+
 - kind: blog_blog
   properties:
   - name: url

@@ -66,6 +66,10 @@ handlers:
   static_dir: django/contrib/admin/static/admin
   expiration: '0'
 
+- url: /admin
+  script : djangoappengine.main.application
+  login : required
+
 - url: /admin/.*
   script : djangoappengine.main.application
   login : required
