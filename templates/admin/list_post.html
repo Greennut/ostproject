@@ -1,0 +1,11 @@
+{% extends "admin_base.html" %}
+        {% block content %}
+        {% for post in posts %}
+        {{ post.title }}
+        {{ post.body }}
+        {{ post.get_blog_name }}
+{{ post.create_time }}
+{{ post.update_time }}
+        <a href="/admin/edit_post/{{post.key.id}}/">edit</a>
+        {% endfor %}
+        {% endblock %}

@@ -1,0 +1,10 @@
+{% extends "admin_base.html" %}
+        {% block content %}
+        {% for blog in blogs %}
+        {{ blog.name }}
+{{ blog.owner }}
+{{ blog.create_time }}
+{{ blog.update_time }}
+            <a href="/admin/edit_blog/{{blog.key.id}}/">edit</a>
+        {% endfor %}
+        {% endblock %}

@@ -1,0 +1,13 @@
+<form method="post">
+    <input type="hidden" name="id" value="{{post.key.id}}">
+    <input name="title" value="{{post.title}}">
+    <textarea name="body">{{post.body}}</textarea>
+    <select name="blog_id">
+        {% for blog in blogs %}
+        <option value="{{blog.key.id}}" {% if blog.key.id == post.blog.id %}selected="selected" {% endif %}>
+            {{ blog.name}}
+        </option>
+        {% endfor %}
+    </select>
+    <input type="submit">
+</form>
