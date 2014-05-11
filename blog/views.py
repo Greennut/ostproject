@@ -19,6 +19,9 @@ def owner(request, owner):
     query = Post.query(Post.owner == owner)
     return render_post_list(request, query, "/owner/")
 
+def blog(request, blog):
+    blog = Blog.query(Blog.name == blog).get()
+    return render_post_list(request, Post.query(Post.blog == blog.key), "/blog/")
 
 def parse_body(body):
     pattern = re.compile(r"(https?://[^\s]*)")

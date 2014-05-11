@@ -23,6 +23,7 @@
                     {{post.body|safe}}
                 </p>
 
+                <p class="blog-post-meta">from <a href="/blog/{{post.get_blog_name}}/">{{post.get_blog_name}}</a></p>
                 <p class="blog-post-meta">Updated on {{post.update_time}}</p>
 
                 <p>Tags:{% for tag in post.tags %} <a href="/tag/{{tag}}/">{{tag}}</a> {% endfor %}</p>
