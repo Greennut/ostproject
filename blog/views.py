@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from google.appengine.ext import ndb
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post, Tag, Blog
 import re
 import logging
@@ -21,6 +22,8 @@ def owner(request, owner):
 
 def blog(request, blog):
     blog = Blog.query(Blog.name == blog).get()
+    if blog is None:
+        return HttpResponseRedirect("/")
     return render_post_list(request, Post.query(Post.blog == blog.key), "/blog/")
 
 def parse_body(body):

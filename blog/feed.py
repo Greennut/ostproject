@@ -32,11 +32,14 @@ class LatestEntriesFeed(Feed):
     description = u"Xiang Ma's python blog system."
 
     def get_object(self, request, *args, **kwargs):
+        self.blog = Blog.query(Blog.name == kwargs['blog']).get()
+        self.title = self.blog.name
+        self.author = self.blog.owner
+        self.description = "Blogs of " + self.blog.name
         return kwargs['blog']
 
-    def items(self, blog):
-        blog = Blog.query(Blog.name == blog).get()
-        return Post.query(Post.blog == blog.key).order(-Post.create_time).fetch()
+    def items(self):
+        return Post.query(Post.blog == self.blog.key).order(-Post.create_time).fetch()
 
     def item_extra_kwargs(self, item):
         return {'content_encoded': self.item_content_encoded(item)}
@@ -58,4 +61,4 @@ class LatestEntriesFeed(Feed):
         return item.body
 
     def item_link(self, item):
-        return "/show/%s/" % item.key.id;
+        return "/show/%s/" % item.key.id();
