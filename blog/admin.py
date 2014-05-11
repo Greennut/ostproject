@@ -3,6 +3,7 @@ from google.appengine.api import users
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect
 import logging
+from google.appengine.ext import blobstore
 
 
 def user_email():
@@ -78,3 +79,6 @@ def edit_post(request, post_id):
         post.put()
         return HttpResponseRedirect("/admin/list_post")
 
+
+def get_upload_form(request):
+    return render(request, "admin/upload.html", {"upload_url": blobstore.create_upload_url("/upload/upload")})

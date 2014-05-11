@@ -24,7 +24,7 @@ def parse_body(body):
         search = pattern.search(body, start)
         if search is None:
             new_body += body[end:]
-            break;
+            break
         old_start = start
         start = search.start()
         end = search.end()

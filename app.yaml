@@ -74,6 +74,12 @@ handlers:
   script : djangoappengine.main.application
   login : required
 
+- url: /upload/.*
+  script : blog.upload.app
+
+- url: /serve/.*
+  script : blog.upload.app
+
 # This handler catches all requests that don't match a previous handler.
 - url: /.*
   script: djangoappengine.main.application
