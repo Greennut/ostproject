@@ -14,7 +14,7 @@ class Tag(ndb.Model):
 class Post(ndb.Model):
     title = ndb.StringProperty()
     owner = ndb.StringProperty()
-    body = ndb.StringProperty()
+    body = ndb.TextProperty()
     blog = ndb.KeyProperty(kind=Blog)
     tags = ndb.StringProperty(repeated=True)
     create_time = ndb.DateTimeProperty(default=datetime.datetime.now())
