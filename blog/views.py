@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from google.appengine.ext import ndb
-from .models import Post,Tag
+from .models import Post, Tag, Blog
 import re
 import logging
 
 post_per_page = 10
+
 
 def index(request):
     return render_post_list(request, Post.query(), "/")
@@ -13,6 +14,11 @@ def index(request):
 def tag(request, tag):
     query = Post.query(Post.tags == tag)
     return render_post_list(request, query, "/tag/")
+
+def owner(request, owner):
+    query = Post.query(Post.owner == owner)
+    return render_post_list(request, query, "/owner/")
+
 
 def parse_body(body):
     pattern = re.compile(r"(https?://[^\s]*)")
@@ -38,6 +44,7 @@ def parse_body(body):
         start = search.end()
     return new_body
 
+
 def render_post_list(request, query, base_url):
     query = query.order(-Post.create_time)
     if "page" in request.GET:
@@ -52,14 +59,18 @@ def render_post_list(request, query, base_url):
     for post in posts:
         post.body = parse_body(post.body[:500])
     tags = Tag.query().fetch()
+    blogs = Blog.query().fetch()
+    owners = Post.query(projection=["owner"],distinct=True).fetch()
     return render(request, "list.html",
                   {
                       "posts": posts,
                       "page": page,
-                      "tags" : tags,
+                      "tags": tags,
                       "pre_page": pre_page,
                       "base_url": base_url,
-                      "next_page": next_page
+                      "next_page": next_page,
+                      "blogs": blogs,
+                      "owners":owners,
                   })
 
 

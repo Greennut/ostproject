@@ -5,8 +5,8 @@ import datetime
 class Blog(ndb.Model):
     name = ndb.StringProperty()
     owner = ndb.StringProperty()
-    create_time = ndb.DateTimeProperty(default=datetime.datetime.now())
-    update_time = ndb.DateTimeProperty(auto_now=True, default=datetime.datetime.now())
+    create_time = ndb.DateTimeProperty(auto_now_add=True)
+    update_time = ndb.DateTimeProperty(auto_now=True, auto_now_add=True)
 
 
 class Tag(ndb.Model):
@@ -19,8 +19,8 @@ class Post(ndb.Model):
     body = ndb.TextProperty()
     blog = ndb.KeyProperty(kind=Blog)
     tags = ndb.StringProperty(repeated=True)
-    create_time = ndb.DateTimeProperty(default=datetime.datetime.now())
-    update_time = ndb.DateTimeProperty(auto_now=True, default=datetime.datetime.now())
+    create_time = ndb.DateTimeProperty(auto_now_add=True)
+    update_time = ndb.DateTimeProperty(auto_now=True, auto_now_add=True)
 
     def _pre_put_hook(self):
         for tag in self.tags:

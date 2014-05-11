@@ -3,7 +3,7 @@ from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Rss201rev2Feed
 from google.appengine.ext import ndb
 
-from .models import Post,Blog
+from .models import Post, Blog
 
 
 class ExtendedRSSFeed(Rss201rev2Feed):
@@ -35,7 +35,7 @@ class LatestEntriesFeed(Feed):
         return kwargs['blog']
 
     def items(self, blog):
-        blog = Blog.query(Blog.name==blog).get()
+        blog = Blog.query(Blog.name == blog).get()
         return Post.query(Post.blog == blog.key).order(-Post.create_time).fetch()
 
     def item_extra_kwargs(self, item):

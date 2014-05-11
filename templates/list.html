@@ -16,11 +16,15 @@
             {% for post in posts %}
             <div class="blog-post">
                 <a href="/show/{{post.key.id}}/"><h2 class="blog-post-title">{{post.title}}</h2></a>
+
                 <p class="blog-post-meta"> by {{post.owner}} on {{post.create_time}}</p>
+
                 <p>
                     {{post.body|safe}}
                 </p>
+
                 <p class="blog-post-meta">Updated on {{post.update_time}}</p>
+
                 <p>Tags:{% for tag in post.tags %} <a href="/tag/{{tag}}/">{{tag}}</a> {% endfor %}</p>
             </div>
             {% endfor %}
@@ -31,6 +35,7 @@
                 <li><a href="{{base_url}}?page={{ pre_page}}">Previous</a></li>
                 {% endif %}
                 {% if next_page > 0 %}
+
                 <li><a href="{{base_url}}?page={{ next_page}}">Next</a></li>
                 {% endif %}
             </ul>
@@ -38,18 +43,35 @@
         </div>
         <!-- /.blog-main -->
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>About</h4>
-            <p>This is Xiang Ma's first python blog.</p>
-          </div>
-          <div class="sidebar-module">
-            <h4>Tags</h4>
-            <ol class="list-unstyled">
-                {% for tag in tags %}
-              <li><a href="/tag/{{tag.key.id}}/">{{tag.key.id}}</a></li>
-                {% endfor %}
-            </ol>
-          </div>
+            <div class="sidebar-module sidebar-module-inset">
+                <h4>About</h4>
+
+                <p>This is Xiang Ma's first python blog.</p>
+            </div>
+            <div class="sidebar-module">
+                <h4>Tags</h4>
+                <ol class="list-unstyled">
+                    {% for tag in tags %}
+                    <li><a href="/tag/{{tag.key.id}}/">{{tag.key.id}}</a></li>
+                    {% endfor %}
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4>RSS</h4>
+                <ol class="list-unstyled">
+                    {% for blog in blogs %}
+                    <li><a href="/feed/{{ blog.name }}/rss/">{{blog.name}}</a></li>
+                    {% endfor %}
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4>Owners</h4>
+                <ol class="list-unstyled">
+                    {% for owner in owners %}
+                    <li><a href="/owner/{{ owner.owner }}/">{{owner.owner}}</a></li>
+                    {% endfor %}
+                </ol>
+            </div>
         </div>
     </div>
     <!-- /.row -->
