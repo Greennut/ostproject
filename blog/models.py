@@ -5,6 +5,8 @@ import datetime
 class Blog(ndb.Model):
     name = ndb.StringProperty()
     owner = ndb.StringProperty()
+    create_time = ndb.DateTimeProperty(default=datetime.datetime.now())
+    update_time = ndb.DateTimeProperty(auto_now=True, default=datetime.datetime.now())
 
 
 class Tag(ndb.Model):

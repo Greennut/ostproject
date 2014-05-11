@@ -1,32 +1,60 @@
 {% extends "admin_base.html" %}
 {% block content %}
-<form method="post">
-    <input name="title" value="{{post.title}}">
-    <textarea name="body">{{post.body}}</textarea>
-    <select name="blog_id">
-        {% for blog in blogs %}
-        <option value="{{blog.key.id}}"
-        {% if blog.key.id == post.blog.id %}selected="selected" {% endif %}>
-        {{ blog.name}}
-        </option>
-        {% endfor %}
-    </select>
-    <input name="tag" value="{{post.tags_string}}">
-    <input type="submit">
-</form>
+<div class="row" style="margin-top:20px;">
 
-<div id="uploaded">
-    <ul id="uploaded_images">
-    </ul>
+    <ol class="breadcrumb">
+        <li><a href="/admin">Home</a></li>
+        <li><a href="/admin/list_post">List Posts</a></li>
+        <li class="active">{% if post %} Update {% else %} Add {% endif %}Post</li>
+    </ol>
 </div>
-<div id="images_forms">
-    <button id="add_image">add image</button>
+<div class="row">
+    <div class="col-sm-8">
+
+        <form method="post" role="form">
+            <div class="form-group">
+                <label>Title</label>
+                <input class="form-control" name="title" value="{{post.title}}" placeholder="Blog title">
+            </div>
+            <div class="form-group">
+                <label>Body</label>
+                <textarea class="form-control" name="body">{{post.body}}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Blog</label>
+                <select name="blog_id" class="form-control">
+                    {% for blog in blogs %}
+                    <option value="{{blog.key.id}}"
+                    {% if blog.key.id == post.blog.id %}selected="selected" {% endif %}>
+                    {{ blog.name}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tags(use ',' to separate them)</label>
+                <input name="tag" value="{{post.tags_string}}" class="form-control">
+            </div>
+            <button class="btn btn-default" type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="col-sm-3">
+        <div id="uploaded">
+            <ul id="uploaded_images"  class="list-unstyled">
+            </ul>
+        </div>
+        <div id="images_forms">
+            <button class="btn btn-default" id="add_image">Add image</button>
+        </div>
+    </div>
 </div>
 <script src="/static/js/jquery.form.min.js"></script>
 <script>
     $(function(){
         var current_form
         $("#add_image").click(function(){
+            $("#add_image").hide()
+            $("#form").remove()
             $.get("/admin/get_upload_form",function(data){
                 current_form = $(data);
                 $("#add_image").before(current_form)
@@ -36,16 +64,20 @@
                         if(data.success == false)
                             alert("upload failed!")
                         else{
-                            var images = '<li><img src="'+data.url+'">'+data.url +"</li>"
+                            var images = '<li><img src="'+data.url+'">You can use this link in your post<br><a href="'+data.url +'">'+data.url+'</a></li>'
                             $("#uploaded_images").append(images);
                         }
                         current_form.remove()
+                        $("#add_image").show()
                     }
                 }
                 current_form.ajaxForm(options)
             })
         })
     })
+
+
+
 
 
 </script>

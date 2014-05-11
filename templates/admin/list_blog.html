@@ -1,12 +1,41 @@
 {% extends "admin_base.html" %}
-        {% block content %}
-        <a href="/admin/add_blog">add Blog</a>
-        <br>
-        {% for blog in blogs %}
-        {{ blog.name }}
-{{ blog.owner }}
-{{ blog.create_time }}
-{{ blog.update_time }}
-            <a href="/admin/edit_blog/{{blog.key.id}}/">edit</a>
-        {% endfor %}
-        {% endblock %}
+{% block content %}
+
+    <div class="row" style="margin-top:20px;">
+
+        <ol class="breadcrumb">
+            <li><a href="/admin">Home</a></li>
+            <li class="active">List Blogs</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" style="margin-top:20px;">
+                <a href="/admin/add_blog" class="btn btn-default btn-lg" role="button">New Blog</a>
+        </div>
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Blog Name</th>
+                    <th>Create Time</th>
+                    <th>Update Time</th>
+                    <th>Operation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for blog in blogs %}
+                <tr>
+                    <td>{{ blog.name }}</td>
+                    <td>{{ blog.create_time }}</td>
+                    <td>{{ blog.update_time }}</td>
+                    <td>
+                        <a href="/admin/edit_blog/{{blog.key.id}}/">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+        </div>
+    </div>
+{% endblock %}

@@ -17,6 +17,7 @@ def tag(request, tag):
 def parse_body(body):
     pattern = re.compile(r"(https?://[^\s]*)")
     image_patter = re.compile(r"(\.jpg|\.png|\.gif)$")
+    upload_pattern = re.compile(r"https?://.*?/serve/.*")
     start = 0
     end = 0
     new_body = ""
@@ -29,7 +30,7 @@ def parse_body(body):
         start = search.start()
         end = search.end()
         new_url = body[start:end]
-        if image_patter.search(new_url) is None:
+        if image_patter.search(new_url) is None and upload_pattern.search(new_url) is None:
             new_url = "<a href='" + new_url + "'>" + new_url + "</a>"
         else:
             new_url = "<img src='" + new_url + "'>"

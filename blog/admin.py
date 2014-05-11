@@ -11,7 +11,7 @@ def user_email():
 
 
 def index(request):
-    return render(request, "admin/index.html", {"user": user_email()})
+    return HttpResponseRedirect("/admin/list_blog")
 
 
 def list_blog(request):

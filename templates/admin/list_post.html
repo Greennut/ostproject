@@ -1,13 +1,43 @@
 {% extends "admin_base.html" %}
-        {% block content %}
-          <a href="/admin/add_post">add Post</a>
-        <br>
-        {% for post in posts %}
-        {{ post.title }}
-        {{ post.body }}
-        {{ post.get_blog_name }}
-{{ post.create_time }}
-{{ post.update_time }}
-        <a href="/admin/edit_post/{{post.key.id}}/">edit</a>
-        {% endfor %}
-        {% endblock %}
+{% block content %}
+
+    <div class="row" style="margin-top:20px;">
+
+        <ol class="breadcrumb">
+            <li><a href="/admin">Home</a></li>
+            <li class="active">List Posts</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" style="margin-top:20px;">
+                <a href="/admin/add_post" class="btn btn-default btn-lg" role="button">New Post</a>
+        </div>
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Post Title</th>
+                    <th>Blog</th>
+                    <th>Create Time</th>
+                    <th>Update Time</th>
+                    <th>Operation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.get_blog_name }}</td>
+                    <td>{{ post.create_time }}</td>
+                    <td>{{ post.update_time }}</td>
+                    <td>
+                        <a href="/admin/edit_post/{{post.key.id}}/">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+        </div>
+    </div>
+{% endblock %}
