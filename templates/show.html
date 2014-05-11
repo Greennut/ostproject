@@ -4,11 +4,11 @@
     <div class="row-sm-8">
 
         <h1 class="blog-post-title">{{post.title}}</h1>
-        <p class="blog-post-meta">{{ post.create_time }} by {{ post.owner }}</p>
+        <p class="blog-post-meta"> by {{ post.owner }} on {{ post.create_time }}</p>
         <p>
             {{post.body|safe}}
         </p>
-        <p class="blog-post-meta">Updated at {{post.update_time}}</p>
+        <p class="blog-post-meta">Updated on {{post.update_time}}</p>
         <p>
 
             Tags :

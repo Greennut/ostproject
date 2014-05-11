@@ -46,7 +46,7 @@ def render_post_list(request, query, base_url):
         page = 1
     pre_page = page - 1
     next_page = page + 1
-    if page * post_per_page > query.count():
+    if page * post_per_page >= query.count():
         next_page = -1
     posts = query.fetch(10, offset=(page - 1) * post_per_page)
     for post in posts:

@@ -29,6 +29,18 @@ indexes:
 
 - kind: Post
   properties:
+  - name: blog
+  - name: create_time
+    direction: desc
+
+- kind: Post
+  properties:
+  - name: owner
+  - name: create_time
+    direction: desc
+
+- kind: Post
+  properties:
   - name: tag
   - name: create_time
     direction: desc

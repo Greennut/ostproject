@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 # from django.contrib import admin
 from django.conf.urls.static import static
+from blog.feed import LatestEntriesFeed
 import dbindexer
 
 handler500 = 'djangotoolbox.errorviews.server_error'
@@ -25,6 +26,7 @@ urlpatterns = patterns('',
     ('^admin/list_post', "blog.admin.list_post"),
     ('^admin/add_post', "blog.admin.add_post"),
     (r'^admin/edit_post/(?P<post_id>\d+)/$', "blog.admin.edit_post"),
+    (r'^feed/(?P<blog>.*?)/rss/$', LatestEntriesFeed()),
 )
 
 # import os

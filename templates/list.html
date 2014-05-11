@@ -16,11 +16,11 @@
             {% for post in posts %}
             <div class="blog-post">
                 <a href="/show/{{post.key.id}}/"><h2 class="blog-post-title">{{post.title}}</h2></a>
-                <p class="blog-post-meta">Published at {{post.create_time}} by {{post.owner}}</p>
+                <p class="blog-post-meta"> by {{post.owner}} on {{post.create_time}}</p>
                 <p>
                     {{post.body|safe}}
                 </p>
-                <p class="blog-post-meta">Updated at {{post.update_time}}</p>
+                <p class="blog-post-meta">Updated on {{post.update_time}}</p>
                 <p>Tags:{% for tag in post.tags %} <a href="/tag/{{tag}}/">{{tag}}</a> {% endfor %}</p>
             </div>
             {% endfor %}
