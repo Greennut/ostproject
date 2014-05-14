@@ -27,7 +27,7 @@ class LatestEntriesFeed(Feed):
 
     # Elements for the top-level, channel.
     title = u"Xiang Ma's python blog"
-    link = "http://xiezj-blog.appspot.com"
+    link = "http://xiangma4.appspot.com"
     author = 'Xiang Ma'
     description = u"Xiang Ma's python blog system."
 
