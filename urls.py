@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     ('^admin/list_post', "blog.admin.list_post"),
     ('^admin/add_post', "blog.admin.add_post"),
     (r'^admin/edit_post/(?P<post_id>\d+)/$', "blog.admin.edit_post"),
-    (r'^feed/(?P<blog>.*)/rss/$', LatestEntriesFeed()),
+#    (r'^feed/(?P<blog>.*)/rss/$', LatestEntriesFeed()),
 )
 
 # import os
